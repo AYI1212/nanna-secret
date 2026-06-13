@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nanna Secret — Cosmétiques de Luxe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF6F0;
+    --cream-dark: #F0E8DC;
+    --sand: #E2D5C3;
+    --gold: #C9A96E;
+    --gold-light: #E8D4A8;
+    --gold-deep: #9B7A40;
+    --bronze: #7A5C2E;
+    --charcoal: #2C2418;
+    --text-muted: #8A7560;
+    --white: #FFFDF9;
+    --radius: 20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  header {
+    background: var(--charcoal);
+    padding: 18px 20px 14px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    text-align: center;
+  }
+
+  header .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+
+  header .logo em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+
+  header .tagline {
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* ── HERO STRIP ─────────────────────────── */
+  .hero-strip {
+    background: linear-gradient(135deg, #1E1610 0%, #3A2D1E 50%, #2C2010 100%);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+
+  .hero-strip h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    position: relative;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-strip p {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 6px;
+    position: relative;
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 12px auto;
+    position: relative;
+  }
+
+  /* ── CATALOGUE GRID ─────────────────────── */
+  .catalogue {
+    padding: 28px 16px 60px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Product card */
+  .product-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid var(--sand);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .product-card:active {
+    transform: scale(0.97);
+  }
+
+  .product-card .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--charcoal);
+    color: var(--gold-light);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 100px;
+    z-index: 2;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+  }
+
+  .product-card .badge.new {
+    background: var(--gold);
+    color: var(--charcoal);
+  }
+
+  .product-card .img-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-card .img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .product-card:hover .img-wrap img,
+  .product-card:focus .img-wrap img {
+    transform: scale(1.04);
+  }
+
+  /* Placeholder illustration for demo */
+  .product-card .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+  }
+
+  .product-card .card-body {
+    padding: 12px 14px 16px;
+  }
+
+  .product-card .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+
+  .product-card .product-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .product-card .price-tag {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-card .price {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--gold-deep);
+    letter-spacing: 0.02em;
+  }
+
+  .product-card .arrow-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .product-card .arrow-btn svg {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: var(--gold-light);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ── DETAIL PAGE (overlay) ──────────────── */
+  .detail-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    background: var(--cream);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    animation: slideUp 0.38s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  .detail-overlay.active {
+    display: flex;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0.5; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  .detail-header {
+    background: var(--charcoal);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .back-btn {
+    background: none;
+    border: 1px solid rgba(201,169,110,0.35);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s;
+  }
+
+  .back-btn:active { background: rgba(201,169,110,0.15); }
+
+  .back-btn svg {
+    width: 16px; height: 16px;
+    fill: none; stroke: var(--gold-light);
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .detail-header-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+  }
+
+  .detail-img-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 360px;
+    background: var(--cream-dark);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .detail-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .detail-img-wrap .detail-placeholder {
+    font-size: 8rem;
+  }
+
+  .detail-img-wrap .detail-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: var(--charcoal);
+    color: var(--gold-light);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  .detail-content {
+    padding: 24px 22px 100px;
+  }
+
+  .detail-brand {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .detail-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+
+  .detail-name em { font-style: italic; font-weight: 300; }
+
+  .detail-price-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 22px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .detail-price {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--gold-deep);
+    letter-spacing: 0.02em;
+  }
+
+  .detail-price-note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .detail-section-title {
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+    margin-top: 22px;
+  }
+
+  .detail-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #4A3D2C;
+    font-style: italic;
+  }
+
+  .posologie-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .posologie-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.87rem;
+    color: #5A4A36;
+    line-height: 1.5;
+  }
+
+  .posologie-list li .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .ingredients-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    letter-spacing: 0.02em;
+  }
+
+  /* CTA fixed bar */
+  .cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--charcoal);
+    padding: 14px 20px;
+    z-index: 300;
+    display: none;
+  }
+
+  .cta-bar.active { display: block; }
+
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 15px 24px;
+    width: 100%;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .whatsapp-btn:active { transform: scale(0.98); background: #1EBA58; }
+
+  .whatsapp-btn svg {
+    width: 20px; height: 20px; flex-shrink: 0;
+  }
+
+  /* ── FOOTER ─────────────────────────────── */
+  footer {
+    background: var(--charcoal);
+    text-align: center;
+    padding: 24px 20px;
+  }
+
+  footer .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  footer p {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ── LOADING ANIMATION ──────────────────── */
+  @keyframes fadeInCard {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .product-card {
+    animation: fadeInCard 0.45s ease both;
+  }
+
+  .product-card:nth-child(1) { animation-delay: 0.05s; }
+  .product-card:nth-child(2) { animation-delay: 0.12s; }
+  .product-card:nth-child(3) { animation-delay: 0.19s; }
+  .product-card:nth-child(4) { animation-delay: 0.26s; }
+  .product-card:nth-child(5) { animation-delay: 0.33s; }
+  .product-card:nth-child(6) { animation-delay: 0.40s; }
+
+  /* Responsive tweaks */
+  @media (min-width: 480px) {
+    .products-grid { gap: 20px; }
+  }
+  @media (min-width: 640px) {
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+    .catalogue { padding: 36px 24px 80px; }
+  }
+  @media (min-width: 900px) {
+    .products-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ MAIN PAGE ════════════════════════════════════════════════════ -->
+<div id="main-page">
+
+  <header>
+    <div class="logo">Nanna <em>Secret</em></div>
+    <div class="tagline">Féminité • Raffinement • Héritage Naturel</div>
+  </header>
+
+  <div class="hero-strip">
+    <p>Collection Exclusive</p>
+    <div class="hero-divider"></div>
+    <h2>Révélez votre potentiel féminin</h2>
+  </div>
+
+  <main class="catalogue">
+    <p class="section-label">Nos Produits</p>
+
+    <div class="products-grid" id="products-grid">
+      <!-- Produits générés par JS -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-logo">Nanna Secret</div>
+    <p>© 2025 — Tous droits réservés</p>
+  </footer>
+
+</div>
+
+<!-- ═══ DETAIL OVERLAY ═══════════════════════════════════════════════ -->
+<div class="detail-overlay" id="detail-overlay">
+  <div class="detail-header">
+    <button class="back-btn" onclick="closeDetail()" aria-label="Retour">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="detail-header-name" id="detail-header-name"></div>
+  </div>
+
+  <div class="detail-img-wrap" id="detail-img-wrap">
+    <!-- filled by JS -->
+  </div>
+
+  <div class="detail-content" id="detail-content">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- Fixed WhatsApp CTA -->
+<div class="cta-bar" id="cta-bar">
+  <a class="whatsapp-btn" id="whatsapp-btn" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Commander via WhatsApp
+  </a>
+</div>
+
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  DONNÉES PRODUITS — modifiez librement !
+//  Pour chaque produit :
+//   image: URL d'une image, ou "" pour l'emoji placeholder
+//   emoji: affiché si pas d'image
+//   whatsapp: votre numéro international SANS le + (ex: 22900000000)
+// ═══════════════════════════════════════════════════════════════════
+const WHATSAPP_NUMBER = "22790150677"; // ← REMPLACEZ PAR VOTRE NUMÉRO
+
+const products = [
+ {
+    id: 1,
+    name: "Sandal VIP",
+    sub: "Encens",
+    price: "40 000 FCFA",
+    badge: "Bestseller",
+    badgeClass: "",
+    emoji: "✨",
+    image: "assets/img1.png",
+    bgColor: "#EDE8E0",
+    description: "Sandal VIP est un encens raffiné aux notes boisées et chaleureuses de santal. Son parfum élégant crée une atmosphère apaisante, propice à la détente, à la méditation et à l'embellissement de votre intérieur. Sa fragrance persistante diffuse une sensation de confort, de sérénité et de prestige.",
+    posologie: [
+      "Déposer l'encens sur un porte-encens avec des braises.",
+      "Laisser diffuser le parfum dans la pièce selon l'intensité souhaitée.",
+    ],
+    ingredients: "Bois de sandal, Douffra, Musk et Extrait de parfums."
+  },
+  {
+    id: 2,
+    name: "Oud Al-layl",
+    sub: "Encens",
+    price: "15 000 FCFA",
+    badge: "Nouveau",
+    badgeClass: "new",
+    emoji: "🌿",
+    image: "assets/img2.png",
+    bgColor: "#E8E0D4",
+    description: "Oud Al-Layl est un encens conçu pour créer une ambiance intime, chaleureuse et raffinée. Élaboré à partir d'Al-Oud du Soudan et enrichi d'extraits de parfums haut de gamme, il diffuse des notes boisées et sensuelles qui favorisent un cadre romantique et élégant. Idéal pour accompagner les moments privilégiés en couple, il transforme votre espace en un lieu de détente et de complicité.",
+    posologie: [
+      "Déposer l'encens sur un porte-encens avec des braises.",
+      "Laisser diffuser le parfum dans la pièce selon l'intensité souhaitée.",
+    ],
+    ingredients: "Al-Oud du Soudan avec extrait des parfums de haute gamme"
+  },
+  {
+    id: 3,
+    name: "Boullette Kindicaille Petite Boite",
+    sub: "Encens",
+    price: "10 000 FCFA",
+    badge: "Premium",
+    badgeClass: "",
+    emoji: "💫",
+    image: "assets/img3.png",
+    bgColor: "#DDD4C6",
+    description: "Boullette Kindicaille est un encens traditionnel présenté sous forme de boulettes parfumées. Apprécié pour sa fragrance riche et persistante, il diffuse un parfum agréable qui embaume durablement les pièces, les vêtements et les espaces de vie. Idéal pour créer une atmosphère chaleureuse, accueillante et raffinée au quotidien.",
+    posologie: [
+      "Déposer une pincée sur un porte-encens avec des braises.",
+      "Laisser la fragrance se diffuser progressivement dans la pièce.",
+    ],
+    ingredients: "Bois de sandal, Douffra, Musk, Huile de sandal."
+  },
+  {
+    id: 4,
+    name: "Boullette Kindicaille Grande Boite",
+    sub: "Encens",
+    price: "40 000 FCFA",
+    badge: "",
+    badgeClass: "",
+    emoji: "🪙",
+    image: "assets/img4.png",
+    bgColor: "#E4DAC8",
+    description: "Boullette Kindicaille est un encens traditionnel présenté sous forme de boulettes parfumées. Apprécié pour sa fragrance riche et persistante, il diffuse un parfum agréable qui embaume durablement les pièces, les vêtements et les espaces de vie. Idéal pour créer une atmosphère chaleureuse, accueillante et raffinée au quotidien.",
+    posologie: [
+      "Déposer une pincée sur un porte-encens avec des braises.",
+      "Laisser la fragrance se diffuser progressivement dans la pièce.",
+    ],
+    ingredients: "Bois de sandal, Douffra, Musk, Huile de sandal."
+  },
+  {
+    id: 5,
+    name: "Oud Chaffe VIP",
+    sub: "Encens",
+    price: "40 000 FCFA",
+    badge: "",
+    badgeClass: "",
+    emoji: "🍯",
+    image: "assets/img6.png",
+    bgColor: "#E6DCC8",
+    description: "Oud Chaffe VIP est un encens haut de gamme qui associe la noblesse du oud à des notes parfumées raffinées pour offrir une expérience olfactive unique. Sa fragrance intense, boisée et élégante parfume durablement les espaces de vie, les vêtements et les moments de réception. Idéal pour les amateurs de senteurs orientales prestigieuses, il apporte une touche de luxe et de distinction à chaque utilisation.",
+    posologie: [
+      "Déposer une petite quantité d'Oud Chaffe VIP sur un charbon ardent ou dans un brûleur d'encens électrique adapté.",
+      "Laisser le parfum se diffuser progressivement dans la pièce.",
+      "Utiliser selon l'intensité de fragrance souhaitée.",
+    ],
+    ingredients: "Bois de chaffe soudanais muské, Douffra, Extrait de parfums de haute gamme"
+  }, 
+  {
+    id: 6,
+    name: "Jawhara",
+    sub: "Secret de femme",
+    price: "50 000 FCFA",
+    badge: "",
+    badgeClass: "",
+    emoji: "🍯",
+    image: "assets/img7.png",
+    bgColor: "#E6DCC8",
+    description: "Jawhara est une préparation traditionnelle inspirée de savoir-faire ancestraux transmis de génération en génération. Élaborée à partir d'ingrédients naturels soigneusement sélectionnés, elle accompagne les femmes dans leur quête de bien-être, d'équilibre et de confiance au quotidien. Appréciée pour son authenticité, elle s'intègre naturellement dans les rituels de soin féminins hérités de la tradition.",
+    posologie: [
+      "Viens sur Whatsapp !",             
+    ],
+    ingredients: "100% naturel a base de plantes ancestrales."
+  },
+  {
+    id: 7,
+    name: "Khamssa Banath",
+    sub: "Secret de femme",
+    price: "25 000 FCFA",
+    badge: "",
+    badgeClass: "",
+    emoji: "🍯",
+    image: "assets/img8.png",
+    bgColor: "#E6DCC8",
+    description: "Khamssa Banath est un soin intime féminin issu des traditions ancestrales. Préparé à partir d'ingrédients 100 % naturels, il est apprécié pour accompagner les rituels de soin et de bien-être féminin. Sa formule inspirée des pratiques traditionnelles procure une agréable sensation de fraîcheur, de confort et de confiance, tout en respectant la délicatesse de l'intimité féminine.",
+    posologie: [
+      "Viens sur Whatsapp !",
+    ],
+    ingredients: "100% naturel a base de plantes ancestrales."
+  } 
+
+];
+
+// ═══════════════════════════════════════════════════════════════════
+
+function buildCatalogue() {
+  const grid = document.getElementById('products-grid');
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Voir ${p.name}`);
+
+    const imgHtml = p.image
+      ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
+      : `<div class="img-placeholder" style="background:${p.bgColor}">${p.emoji}</div>`;
+
+    card.innerHTML = `
+      ${p.badge ? `<span class="badge ${p.badgeClass}">${p.badge}</span>` : ''}
+      <div class="img-wrap" style="background:${p.bgColor}">${imgHtml}</div>
+      <div class="card-body">
+        <div class="product-name">${p.name}</div>
+        <div class="product-sub">${p.sub}</div>
+        <div class="price-tag">
+          <span class="price">${p.price}</span>
+          <span class="arrow-btn">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </div>
+      </div>`;
+
+    card.addEventListener('click', () => openDetail(p.id));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openDetail(p.id); });
+    grid.appendChild(card);
+  });
+}
+
+function openDetail(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+
+  // Header name
+  document.getElementById('detail-header-name').textContent = p.name;
+
+  // Image
+  const imgWrap = document.getElementById('detail-img-wrap');
+  imgWrap.innerHTML = p.image
+    ? `<img src="${p.image}" alt="${p.name}"><span class="detail-badge">${p.sub}</span>`
+    : `<div class="detail-placeholder" style="background:${p.bgColor};width:100%;height:100%;display:flex;align-items:center;justify-content:center;">${p.emoji}</div><span class="detail-badge">${p.sub}</span>`;
+
+  // Content
+  const posItems = p.posologie.map(s => `<li><span class="dot"></span>${s}</li>`).join('');
+  document.getElementById('detail-content').innerHTML = `
+    <div class="detail-brand">Nanna Secret</div>
+    <h1 class="detail-name">${p.name}</h1>
+    <div class="detail-price-row">
+      <span class="detail-price">${p.price}</span>
+      <span class="detail-price-note">Livraison disponible</span>
+    </div>
+    <p class="detail-section-title">Description</p>
+    <p class="detail-description">${p.description}</p>
+    <p class="detail-section-title">Posologie &amp; Utilisation</p>
+    <ul class="posologie-list">${posItems}</ul>
+    <p class="detail-section-title">Ingrédients</p>
+    <p class="ingredients-text">${p.ingredients}</p>
+  `;
+
+  // WhatsApp link
+  const msg = encodeURIComponent(`Bonjour ! Je suis intéressé(e) par le produit *${p.name}* (${p.price}). Pouvez-vous me donner plus d'informations ? Merci 🌿`);
+  document.getElementById('whatsapp-btn').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+
+  // Show overlay & CTA
+  const overlay = document.getElementById('detail-overlay');
+  overlay.classList.add('active');
+  overlay.scrollTop = 0;
+  document.getElementById('cta-bar').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('detail-overlay').classList.remove('active');
+  document.getElementById('cta-bar').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Back gesture / browser back
+window.addEventListener('popstate', closeDetail);
+
+// Init
+buildCatalogue();
+</script>
+</body>
+</html>
